@@ -66,10 +66,13 @@ def create_app(atomspace: AtomSpace = None) -> Flask:
 
 def main():
     """Run the server"""
+    import os
     app = create_app()
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
     print("Starting cogpy HyperGraphQL server...")
     print("GraphQL endpoint: http://localhost:5000/graphql")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print(f"Debug mode: {debug_mode}")
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
 
 
 if __name__ == '__main__':
